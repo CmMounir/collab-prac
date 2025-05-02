@@ -8,58 +8,54 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
-class Solution {
+class Solution
+{
 public:
-    ListNode* mergeTwoLists(ListNode* list1, ListNode* list2) {
-        if (list1 == nullptr && list2 == nullptr) {
-            return nullptr;
-        }
-        else if (list1 == nullptr && list2 != nullptr) {
-            return list2;
-        }
-        else if (list1 != nullptr && list2 == nullptr) {
-            return list1;
-        }
-        ListNode* res = nullptr;
-        ListNode* out = nullptr;
+    ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
+    {
+        ListNode *head = nullptr;
+        ListNode *tail = nullptr;
 
-        while ((list1 != nullptr) && (list2 != nullptr)) {
-            if (list1->val > list2->val) {
-                if (res == nullptr) {
-                    res = new ListNode(list2->val);
-                    out = res;
-                }
-                else{
-                    res->next = new ListNode(list2->val);
-                    res = res->next;
-                }
+        auto addValue = [&head, &tail](int value)
+        {
+            if (head == nullptr)
+            {
+                head = new ListNode(value);
+                tail = head;
+            }
+            else
+            {
+                tail->next = new ListNode(value);
+                tail = tail->next;
+            }
+        };
+
+        while (list1 && list2)
+        {
+            if (list1->val > list2->val)
+            {
+                addValue(list2->val);
                 list2 = list2->next;
             }
-            else {
-                if (res == nullptr) {
-                    res = new ListNode(list1->val);
-                    out = res;
-                }
-                else {
-                    res->next = new ListNode(list1->val);
-                    res = res->next;
-                }
+            else
+            {
+                addValue(list1->val);
                 list1 = list1->next;
-            } 
+            }
         }
 
-        while (list1 != nullptr) {
-            res->next = new ListNode(list1->val);
-            res = res->next;
+        while (list1)
+        {
+            addValue(list1->val);
             list1 = list1->next;
         }
-        while (list2 != nullptr) {
-            res->next = new ListNode(list2->val);
-            res = res->next;
+
+        while (list2)
+        {
+            addValue(list2->val);
             list2 = list2->next;
         }
 
-
-        return out;
+        return head;
     }
 };
