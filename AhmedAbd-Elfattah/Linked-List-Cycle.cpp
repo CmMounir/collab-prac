@@ -8,18 +8,17 @@
  */
 class Solution {
 public:
-    bool hasCycle(ListNode* head) {
-        ListNode* fastPointer = head;
+    bool hasCycle(ListNode *head) {
         ListNode* slowPointer = head;
-
-        while (fastPointer && fastPointer->next) {
+        ListNode* fastPointer = head;
+        while (fastPointer && fastPointer->next){
+            
             slowPointer = slowPointer->next;
             fastPointer = fastPointer->next->next;
-            if (slowPointer == fastPointer) {
+            if (slowPointer == fastPointer){
                 return true;
             }
         }
-
         return false;
     }
 };
