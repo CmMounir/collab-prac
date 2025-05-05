@@ -18,8 +18,10 @@ public:
             if(fast_pointer->next == nullptr) {
                 return slow_pointer;
             }
-            slow_pointer = slow_pointer->next;    
-            fast_pointer = fast_pointer->next->next;
+            else {
+                slow_pointer = slow_pointer->next;
+                fast_pointer = fast_pointer->next->next;
+            }
         }
 
         return slow_pointer;
