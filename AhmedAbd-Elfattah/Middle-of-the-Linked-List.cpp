@@ -13,8 +13,7 @@ public:
     ListNode* middleNode(ListNode* head) {
         ListNode* slowPointer = head;
         ListNode* fastPointer = head;
-
-        while (fastPointer && fastPointer->next) {
+        while (fastPointer && fastPointer->next){
             slowPointer = slowPointer->next;
             fastPointer = fastPointer->next->next;
         }
