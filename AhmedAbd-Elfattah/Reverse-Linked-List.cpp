@@ -1,54 +1,46 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode() : val(0), next(nullptr) {}
- *     ListNode(int x) : val(x), next(nullptr) {}
- *     ListNode(int x, ListNode *next) : val(x), next(next) {}
- * };
- */
 class Solution {
     private:
-    ListNode *first;
+    ListNode *f;
 public:
-void reverse(ListNode *middle, ListNode *pointer)
+void rev (ListNode *m, ListNode *p)
     {
-        if (nullptr == pointer)
-        {
+        if (nullptr == p)
             return;
-        }
-        reverse(middle, pointer->next);
-
-        if (first == middle)
+        rev(m, p->next);
+        if (f == m)
         {
-            first = nullptr;
+            f = nullptr;
             return;
         }
 
-        if (!first || !pointer)
+        if (!f || !p)
         {
             return;
         }
-        std::swap(first->val, pointer->val);
-        first = first->next;
+
+
+        std::swap(f->val, p->val);
+        f = f->next;
+
+
     }
 
     ListNode *reverseList(ListNode *head)
     {
-        ListNode *headPointer = head;
-        ListNode *revPointer = head;
+        ListNode *headp = head;
+        ListNode *revp = head;
+        ListNode *mp = head;
+        ListNode *fp = head;
 
-        ListNode *MiddlePointer = head;
-        ListNode *fastPointer = head;
 
-        while (fastPointer && fastPointer->next)
+        while (fp && fp->next)
         {
-            MiddlePointer = MiddlePointer->next;
-            fastPointer = fastPointer->next->next;
+            mp = mp->next;
+            fp = fp->next->next;
         }
-        first = headPointer;
-        reverse(MiddlePointer, revPointer);
+        
+        f = headp;
+        rev(mp, revp);
 
         return head;
     }
