@@ -10,49 +10,51 @@
  */
 class Solution {
 public:
-    ListNode* oddEvenList(ListNode* head) {
-        if (!head || !head->next) return head;
 
-ListNode* h1 = nullptr;
-ListNode* t1 = nullptr;
+        ListNode* oddEvenList(ListNode* head) {
+    if (!head || !head->next)
+        return head;
+    ListNode* newHead = nullptr;
+    ListNode* newTail = nullptr;
+    ListNode* current = head;
+    ListNode* lastEvenNode = head;
+    size_t counter = 0;
+    auto add = [&newHead, &newTail](ListNode* n) {
+        n->next = nullptr;
+        if (newHead == nullptr) {
+            newHead = n;
+            newTail = newHead;
+        }
+        else {
+            newTail->next = n;
+            newTail = newTail->next;
+        }
+        };
 
-ListNode* h2 = nullptr;
-ListNode* t2 = nullptr;
+    while (current)
+    {
+        counter++;
+        if (!(counter % 2)) {
+            lastEvenNode->next = current->next;
+            add(current);
+            current = lastEvenNode->next;
+            continue;
+        }
+        else {
+            lastEvenNode = current;
+        }
+        current = current->next;
+    }
 
-auto add_1 = [&h1, &t1](int val) {
-    if (h1 == nullptr) {
-        h1 = new ListNode(val);
-        t1 = h1;
+    current = head;
+    while (current)
+    {
+        if (current->next == nullptr) {
+            current->next = newHead;
+            break;
+        }
+        current = current->next;
     }
-    else {
-        t1->next = new ListNode(val);
-        t1 = t1->next;
-    }
-};
-
-auto add_2 = [&h2, &t2](int val) {
-    if (h2 == nullptr) {
-        h2 = new ListNode(val);
-        t2 = h2;
-    }
-    else {
-        t2->next = new ListNode(val);
-        t2 = t2->next;
-    }
-    };
-
-size_t counter = 0;
-while (head) {
-    if (counter % 2) {
-        add_2(head->val);
-    }
-    else {
-        add_1(head->val);
-    }
-    counter++;
-    head = head->next;
+    return head;
 }
-t1->next = h2;
-return h1;
-    }
 };
