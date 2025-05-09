@@ -11,9 +11,6 @@
  */
 class Solution {
 public:
-    vector<int> p_nodes;
-    vector<int> q_nodes;
-
     bool check(TreeNode* p, TreeNode* q) {
         if(p == nullptr && q != nullptr) {
             return false;
