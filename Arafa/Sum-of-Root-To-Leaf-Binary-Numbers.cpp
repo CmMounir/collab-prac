@@ -11,8 +11,7 @@
  */
 class Solution {
 public:
-    int sum = 0;
-    void solve(TreeNode* root, stack<int> myStack) {
+    void solve(TreeNode* root, stack<int> myStack, int& sum) {
         if(root == nullptr) return;
         if(root->left == nullptr &&  root->right == nullptr) {
             int cal = root->val;
@@ -27,12 +26,13 @@ public:
         }
 
         myStack.push(root->val);
-        solve(root->left, myStack);
-        solve(root->right, myStack);
+        solve(root->left, myStack, sum);
+        solve(root->right, myStack, sum);
     }
     int sumRootToLeaf(TreeNode* root) {
         stack<int> nums;
-        solve(root, nums);
+        int sum = 0;
+        solve(root, nums, sum);
         return sum;
     }
 };
