@@ -11,8 +11,7 @@
  */
 class Solution {
 public:
-    int min = INT_MAX;
-    void solve(TreeNode* root, int index) {
+    void solve(TreeNode* root, int index, int& min) {
         if(root == nullptr) return ;
     
         if(root->left == nullptr && root->right == nullptr) {
@@ -21,11 +20,12 @@ public:
             return ;
         }
         
-        solve(root->left, index+1);
-        solve(root->right, index+1);
+        solve(root->left, index+1, min);
+        solve(root->right, index+1, min);
     }
     int minDepth(TreeNode* root) {
-        solve(root, 1);
+        int min = INT_MAX;
+        solve(root, 1, min);
         return (min==INT_MAX ? 0 : min);
     }
 };
