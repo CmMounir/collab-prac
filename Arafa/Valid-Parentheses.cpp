@@ -1,34 +1,27 @@
-class Solution {
-public:
-    bool isValid(string s) {
-        if(s.length() %2 == 1) {
-            return false;
-        }
-
-        stack<char> myStack;
-        for(int i =0; i < s.length(); i++) {
-            if(s[i] == '(' || s[i] == '{' || s[i] == '[') {
-                myStack.push(s[i]);
-            }
-            else {
-                if( myStack.size() != 0 &&
-                    (
-                    ( myStack.top() == '(' && s[i] == ')' ) || 
-                    ( myStack.top() == '[' && s[i] == ']' ) || 
-                    ( myStack.top() == '{' && s[i] == '}' )
-                    ) 
-                ) {
-                    myStack.pop();
-                }
-                else {
-                    return false;
-                }
-            }
-
-        }
-        if(myStack.size() == 0)
-            return true;
-        else 
-            return false;
-    }
-};
+1class Solution {
+2public:
+3    bool isValid(string s) {
+4        if(s == "") return true;
+5
+6        stack<char> myStack;
+7    
+8        for(const auto& character : s) {
+9            if(myStack.empty()) { // if stack is empty, add to it
+10                myStack.push(character);
+11            }
+12            else { // check character with top of stack
+13                char top = myStack.top();
+14                if(character == ')' && top == '(')
+15                    myStack.pop();
+16                else if(character == '}' && top == '{')
+17                    myStack.pop();
+18                else if(character == ']' && top == '[')
+19                    myStack.pop();
+20                else 
+21                    myStack.push(character);
+22            }
+23        }
+24        
+25        return myStack.empty();
+26    }
+27};
