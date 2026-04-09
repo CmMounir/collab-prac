@@ -11,32 +11,24 @@
 11class Solution {
 12public:
 13    ListNode* reverseList(ListNode* head) {
-14        stack<ListNode*> myStack;
-15        ListNode* temp = head;
-16        ListNode* res = nullptr;
-17
-18        if(head == nullptr) 
-19            return head;
+14        ListNode* new_head= nullptr;
+15        ListNode* helper = nullptr;
+16
+17        while(head != nullptr) {
+18            // create node to hold current value
+19            helper = new ListNode(head->val);
 20
-21        myStack.push(nullptr);
-22
-23        while(temp != nullptr) {
-24            myStack.push(temp);
-25            temp = temp->next;
-26        }
-27        
-28        while(!myStack.empty()) {
-29            if(res == nullptr) {
-30                res = myStack.top();
-31                temp = res;
-32            }
-33            else {
-34                temp->next = myStack.top();
-35                temp = temp->next;
-36            }
-37            myStack.pop();
-38        }
-39        
-40        return res;
-41    }
-42};
+21            if(new_head == nullptr) {
+22                new_head = helper;
+23            }
+24            else {
+25                helper->next = new_head;
+26                new_head = helper;
+27            }
+28
+29            head = head->next;
+30        }
+31
+32        return new_head;
+33    }
+34};
