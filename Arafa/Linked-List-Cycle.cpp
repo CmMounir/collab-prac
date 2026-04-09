@@ -1,24 +1,24 @@
-/**
- * Definition for singly-linked list.
- * struct ListNode {
- *     int val;
- *     ListNode *next;
- *     ListNode(int x) : val(x), next(NULL) {}
- * };
- */
-class Solution {
-public:
-    bool hasCycle(ListNode *head) {
-       map<ListNode *, int> myMap;
-
-       while(head != nullptr) {
-            if(myMap[head] == 1) {
-                return true;
-            }
-            myMap[head] = 1;
-            head = head->next;
-       }
-
-        return false;
-    }
-};
+1/**
+2 * Definition for singly-linked list.
+3 * struct ListNode {
+4 *     int val;
+5 *     ListNode *next;
+6 *     ListNode(int x) : val(x), next(NULL) {}
+7 * };
+8 */
+9class Solution {
+10public:
+11    bool hasCycle(ListNode *head) {
+12      ListNode* temp = head;
+13      map<ListNode *, bool> myMap;
+14
+15      while(temp != nullptr) {
+16        if(myMap[temp] == false)    
+17            myMap[temp] = true;
+18        else
+19            return true;
+20        temp = temp->next;
+21      }
+22      return false;
+23    }
+24};
